@@ -1,0 +1,15 @@
+<h1>おすすめフロー</h1>
+
+<ul class="users">
+  <% if @follows.any? %>
+     <% @follows.each do |user|%>
+       <li>
+         <%= gravatar_for user.profile_image_url, user %>
+         <%= link_to user.username, "#" %>
+         <%= link_to "フロー",{},{:class => "button"} %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+

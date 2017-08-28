@@ -3,4 +3,5 @@ Rails.application.routes.draw do
     controllers: { omniauth_callbacks: "omniauth_callbacks" }
   get 'static_pages/home'
   root 'static_pages#home'
+  get 'static_pages/show'
 end

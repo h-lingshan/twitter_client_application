@@ -38,6 +38,7 @@ gem 'bootstrap-sass', '3.3.7'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'devise'
+gem 'twitter'
 #gem 'bcrypt', platforms: :ruby
 group :production do
   gem 'pg', '0.20.0'
