@@ -39,6 +39,10 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'devise'
 gem 'twitter'
+gem 'jquery-rails'
+gem 'haml-rails'
+gem 'devise-i18n'
+gem 'rails-i18n'
 #gem 'bcrypt', platforms: :ruby
 
 group :development, :test do

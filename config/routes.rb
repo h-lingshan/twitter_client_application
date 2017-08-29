@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   root 'static_pages#home'
   get 'static_pages/show'
+  post 'static_pages/add_follow'
+  get '/recommendations' => "static_pages#recommendations"
 end
