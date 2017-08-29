@@ -1,6 +1,8 @@
 require 'openssl' if Rails.env.development?
-OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE  if Rails.env.development?
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE  if Rails.env.development? #windowsの環境でエラーが起きるのを防ぐように追加
 class StaticPagesController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :recommendations, :init_follow, :followers, :add_follow, :show_tweet, :save_tweet]
+  before_action :init, only: [:init_follow, :followers, :add_follow]
   def home  
    
   end
@@ -22,7 +24,6 @@ class StaticPagesController < ApplicationController
   end
 
   def init_follow
-    init 
     @follows = []
     @follows.push(@client.user("jack"))
     @follows.push(@client.user("yukihiro_matz"))
@@ -30,18 +31,22 @@ class StaticPagesController < ApplicationController
   end
 
   def followers
-    init
     @users = @client.friends(current_user.username)
   end
 
   def add_follow
-    init
     @client.follow(params[:username])
+  end
+  
+  def show_tweet
+    @tweet_note = TweetNote.where(user_uid: current_user.uid)
+    render "tweet"
   end
 
   def save_tweet
-    #tweet = params[:text]
-    #author = params[:username]
+    tweet = params[:text]
+    author = params[:username]
+    TweetNote.create(tweet_author: author,tweet: tweet,user_uid: current_user.uid)
   end
   
   private
