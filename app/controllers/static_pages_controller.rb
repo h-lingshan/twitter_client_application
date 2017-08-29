@@ -2,7 +2,7 @@ require 'openssl' if Rails.env.development?
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE  if Rails.env.development?
 class StaticPagesController < ApplicationController
   def home  
-    
+   
   end
 
   def show
@@ -13,6 +13,12 @@ class StaticPagesController < ApplicationController
   def recommendations
     init
     @follows = @client.suggest_users("twitter")
+    max_id = @client.home_timeline.first.id
+    @feed_items = @client.home_timeline(:max_id => max_id, :count => 10)
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def init_follow
@@ -25,16 +31,19 @@ class StaticPagesController < ApplicationController
 
   def followers
     init
-    @title = "followers"
     @users = @client.friends(current_user.username)
   end
 
-  def add_follow(user_name)
+  def add_follow
     init
-    @client.follow(user_name)
+    @client.follow(params[:username])
+  end
+
+  def save_tweet
+    #tweet = params[:text]
+    #author = params[:username]
   end
   
-
   private
   def init
     @client = Twitter::REST::Client.new do |config|
