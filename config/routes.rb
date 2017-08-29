@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get 'static_pages/show'
   post 'static_pages/add_follow'
+  post 'static_pages/save_tweet'
+  get 'static_pages/show_tweet'
   get '/recommendations' => "static_pages#recommendations"
 end

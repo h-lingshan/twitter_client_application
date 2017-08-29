@@ -1,0 +1,13 @@
+<h1>保存されたタイムライン</h1>
+<div class="row">
+<% if !@tweet_note.blank? %>
+  <ol class="microposts">
+  <% @tweet_note.each do |tweet|%>
+    <li>
+     <%= link_to tweet.tweet_author, "" %>
+     <p><%= tweet.tweet %></p>
+    </li>   
+  <% end %>
+  </ol>
+<% end %>
+</div>
