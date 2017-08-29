@@ -5,7 +5,7 @@ class OmniauthCallbacksController < ApplicationController
     if user.persisted?
       # ログインに成功
       flash.notice = "ログインしました!!"
-      redirect_to new_user_registration_path
+      sign_in_and_redirect user, :event => :authentication
     else
       # ログインに失敗し、サインイン画面に遷移
       session["devise.user_attributes"] = user.attributes
