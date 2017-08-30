@@ -1,8 +1,8 @@
-$(document).ready(function () {
-  setInterval(refreshPartial,300000);
+$(document).ready(function() {
+  setInterval(refreshPartial,200000);
 })
 function refreshPartial(){
   $.ajax({
-      url: "/recommendations"
+      url: "/time_line"
   })
 }
