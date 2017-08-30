@@ -2,8 +2,6 @@
 <% if @follows.any? %>
   <%= render :partial => "show" %>
 <% end %>
-
- <li><%= link_to "気に入りTWEET", static_pages_show_tweet_path %></li>
    
 <h1>タイムライン</h1>
 <% if @feed_items.any? %>

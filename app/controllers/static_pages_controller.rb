@@ -10,13 +10,27 @@ class StaticPagesController < ApplicationController
   def show
     init_follow if user_signed_in? && current_user.sign_in_count == 1
     recommendations if user_signed_in? && current_user.sign_in_count > 1
+    time_line if user_signed_in? && current_user.sign_in_count > 1
   end
   
   def recommendations
     init
     @follows = @client.suggest_users("twitter")
-    max_id = @client.home_timeline.first.id
+  end
+
+  def time_line
+    init
+    max_id = params[:max_id] == nil ? @client.home_timeline.first.id : params[:max_id]
     @feed_items = @client.home_timeline(:max_id => max_id, :count => 10)
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+  
+  def time_line_max_id
+    init 
+    @max_id = @client.home_timeline.first.id
     respond_to do |format|
       format.js
       format.html

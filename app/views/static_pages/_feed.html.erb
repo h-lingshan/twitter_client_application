@@ -1,9 +1,9 @@
-<div class="col-md-8">
+<div id="feed_containter" class="col-md-8">
 <% if @feed_items.any? %>
   <ol class="microposts">
   <% @feed_items.each do |tweet|%>
     <li>
-     <%= gravatar_for tweet.user.profile_image_url, tweet.user.username %>
+     <%= gravatar_for tweet.user.profile_image_url, tweet.id %>
      <%= link_to tweet.user.username, "" %>
      <P><%= distance_of_time_in_words_to_now(tweet.created_at)%>前</p>
      <p><%= tweet.text %></p>

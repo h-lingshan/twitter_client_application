@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   post 'static_pages/save_tweet'
   get 'static_pages/show_tweet'
   get '/recommendations' => "static_pages#recommendations"
+  get '/time_line' => "static_pages#time_line"
+  get '/time_line_max_id' => "static_pages#time_line_max_id"
 end
