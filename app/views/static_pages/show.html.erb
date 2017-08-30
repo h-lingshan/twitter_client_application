@@ -5,7 +5,11 @@
    
 <h1>タイムライン</h1>
 <% if @feed_items.any? %>
+  <button id="btn_new_tweet" type="button" class="btn btn-primary btn-xs">新着ある</button>
+  <%= hidden_field_tag 'max_id', @init_max_id %>
+  <div id="feed_containter" class="col-md-8">
   <%= render :partial => "feed" %>
+  </div>
 <% end %>
 </div>
 

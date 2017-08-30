@@ -2,7 +2,7 @@ require 'openssl' if Rails.env.development?
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE  if Rails.env.development? #windowsの環境でエラーが起きるのを防ぐように追加
 class StaticPagesController < ApplicationController
   before_action :authenticate_user!, only: [:show, :recommendations, :init_follow, :followers, :add_follow, :show_tweet, :save_tweet]
-  before_action :init, only: [:init_follow, :followers, :add_follow]
+  before_action :init, only: [:init_follow, :followers, :add_follow, :time_line, :time_line_max_id]
   def home  
    
   end
@@ -19,9 +19,9 @@ class StaticPagesController < ApplicationController
   end
 
   def time_line
-    init
-    max_id = params[:max_id] == nil ? @client.home_timeline.first.id : params[:max_id]
+    max_id =  @client.home_timeline.first.id 
     @feed_items = @client.home_timeline(:max_id => max_id, :count => 10)
+    @init_max_id = max_id
     respond_to do |format|
       format.js
       format.html
@@ -29,11 +29,11 @@ class StaticPagesController < ApplicationController
   end
   
   def time_line_max_id
-    init 
     @max_id = @client.home_timeline.first.id
     respond_to do |format|
-      format.js
-      format.html
+      format.json { 
+        render json: {:max_id => @max_id}
+     } 
     end
   end
 
