@@ -1,14 +1,13 @@
 <div class="col-md-4"> 
- <ol>
-<% @follows.each do |user|%>
-  <li>
-    <%= gravatar_for user.profile_image_url, user %>
-    <%= link_to user.username, "#" %>
-    <%= link_to "フォロー",static_pages_add_follow_path(:username => user.username), :method => "post" ,:class => "btn btn-primary btn-xs",:remote => true %>
-  </li>   
-<% end %>
-</ol>
-<%= link_to "気に入りTWEET", static_pages_show_tweet_path, class: "btn btn-primary btn-xs" %>
- </div>
+  <ol>
+    <% @follows.each do |user|%>
+    <li>
+      <%= gravatar_for user.profile_image_url, user %>
+      <%= link_to user.username, "#" %>
+      <%= link_to "フォロー",static_pages_add_follow_path(:username => user.username), :method => "post" ,:class => "btn btn-primary btn-xs",:remote => true %>
+    </li>   
+    <% end %>
+  </ol>
+</div>
 
 

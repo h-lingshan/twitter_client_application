@@ -15,6 +15,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "ホーム", static_pages_home_path %></li>
               <% if user_signed_in? %> 
+                  <li><%= link_to "気に入りTWEET", static_pages_show_tweet_path %></li>
                   <li><%= link_to "タイムライン", static_pages_show_path %></li>
                   <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
                   <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
